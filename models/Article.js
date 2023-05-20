@@ -2,8 +2,8 @@ const {Schema, model } = require("mongoose");
 
 const schema = new Schema({
     name: {type: String, required: true},
-    author: {type: String, required: true}, // д/б id пользователя
-    date: {type: Number},
+    author: {type: String, required: true}, // id автора статьи
+    date: Number,
     category: {type: String},
     header: {type: String},
     img: {type: String},

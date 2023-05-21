@@ -5,20 +5,18 @@ module.exports = (req, res, next) => {
         return next();
     }
     try {
-        // const token = req.headers.authorization.split(' ')[1]
-        const token = req.headers.authorization.split(" ")[1]
+        // headers key = authorization; headers value = Bearer "token"
+        const token = req.headers.authorization.split(" ")[1];
         if (!token){
-            // return res.send(401).json({message: "Unauthorized"});
-            return res.status(401).json({message: "token doesn`t exist"});
+            return res.status(401).json({message: "Access token doesn`t exist"});
         }
         const data = tokenService.validateAccess(token);
         if (!data){
-            // return res.status(401).json({message: 'Unauthorized'})
-            return res.status(401).json({message: "access token doesn`t valid"});
+            return res.status(401).json({message: 'Unauthorized'})
         }
         req.user = data;
         next();
     } catch (error) {
-        return res.status(401).json({message: 'blocked by auth middleware'});
+        return res.status(401).json({message: 'Blocked by auth middleware'});
     }
 };

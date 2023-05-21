@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const { check, validationResult } = require("express-validator");
 const User = require("../models/User");
 const { generateUserData } = require("../utils/generateUserData");
-const tokenService = require("../services/toket.service");
+const tokenService = require("../services/token.service");
 const router = express.Router({ mergeParams: true });
 
 // ./api/auth/signUp - регистрация

@@ -34,7 +34,7 @@ router.post("/signUp", [
             }
             const hashedPassword = await bcrypt.hash(password, sold = 12);
             const newUser = await User.create({
-                ...generateUserData(),
+                // ...generateUserData(),
                 ...req.body,
                 password: hashedPassword
             });

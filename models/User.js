@@ -1,13 +1,21 @@
 const { Schema, model } = require("mongoose");
 
 const schema = new Schema({
-	name: {type: String},
+	firstName: {type: String},
+    lastName: {type: String},
 	email: {type: String, required: true, unique: true},
 	password: {type: String},
-    accountType: String,
-    image: String,
+    city: String,
+    country: String,
+    sex: {type: String},
+    img: String,
+    birthDate: String,
+    about: {type: String},
+    socialNetworks: [{type: Object}],
+    selectedArticlesList: [{type: String}],
+    accountType: {type: String},
     rate: Number,
-    sex: {type: String, enum: ['male' | 'female' | 'other']}
+    licence: Boolean
     // profession: {type: Schema.Types.ObjectId, ref: "Profession"},
 	// qualities: [{type: Schema.Types.ObjectId, ref: "Quality"}] 
 }, {

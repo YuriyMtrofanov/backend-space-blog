@@ -7,7 +7,7 @@
         "category": "categories.openSpace",
         "header": "Заголовок статьи",
         "img": "URL",
-        "textContent": "Текст статьи",
+        "content": "Текст статьи",
         "rate": 15,
         "bookmark": false
     },
@@ -19,7 +19,7 @@
         "category": "categories.news",
         "header": "Заголовок статьи",
         "img": "URL",
-        "textContent": "Текст статьи",
+        "content": "Текст статьи",
         "rate": 10,
         "bookmark": false
     },
@@ -31,7 +31,7 @@
         "category": "categories.hobbyAstronomy",
         "header": "Заголовок статьи",
         "img": "URL",
-        "textContent": "Текст статьи",
+        "content": "Текст статьи",
         "rate": 31,
         "bookmark": false
     },
@@ -43,7 +43,7 @@
         "category": "categories.openSpace",
         "header": "Заголовок статьи",
         "img": "URL",
-        "textContent": "Текст статьи",
+        "content": "Текст статьи",
         "rate": 7,
         "bookmark": false
     },
@@ -55,7 +55,7 @@
         "category": "categories.spaceExploration",
         "header": "Заголовок статьи",
         "img": "URL",
-        "textContent": "Текст статьи",
+        "content": "Текст статьи",
         "rate": 3,
         "bookmark": false
     },
@@ -67,7 +67,7 @@
         "category": "categories.solarSystem",
         "header": "Заголовок статьи",
         "img": "URL",
-        "textContent": "Текст статьи",
+        "content": "Текст статьи",
         "rate": 24,
         "bookmark": false
     },
@@ -79,7 +79,7 @@
         "category": "categories.hobbyAstronomy",
         "header": "Заголовок статьи",
         "img": "URL",
-        "textContent": "Текст статьи",
+        "content": "Текст статьи",
         "rate": 13,
         "bookmark": false
     },
@@ -91,7 +91,7 @@
         "category": "categories.universe",
         "header": "Заголовок статьи",
         "img": "URL",
-        "textContent": "Текст статьи",
+        "content": "Текст статьи",
         "rate": 18,
         "bookmark": false
     },
@@ -103,7 +103,7 @@
         "category": "categories.spaceExploration",
         "header": "Заголовок статьи",
         "img": "URL",
-        "textContent": "Текст статьи",
+        "content": "Текст статьи",
         "rate": 27,
         "bookmark": false
     },
@@ -115,7 +115,7 @@
         "category": "categories.solarSystem",
         "header": "Заголовок статьи",
         "img": "URL",
-        "textContent": "Текст статьи",
+        "content": "Текст статьи",
         "rate": 19,
         "bookmark": false
     },
@@ -127,7 +127,7 @@
         "category": "categories.solarSystem",
         "header": "Заголовок статьи",
         "img": "URL",
-        "textContent": "Текст статьи",
+        "content": "Текст статьи",
         "rate": 33,
         "bookmark": false
     },
@@ -139,7 +139,7 @@
         "category": "categories.solarSystem",
         "header": "Заголовок статьи",
         "img": "URL",
-        "textContent": "Текст статьи",
+        "content": "Текст статьи",
         "rate": 7,
         "bookmark": false
     }

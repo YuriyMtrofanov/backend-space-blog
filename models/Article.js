@@ -7,7 +7,7 @@ const schema = new Schema({
     category: {type: String},
     header: {type: String},
     img: {type: String},
-    textContent: {type: String},
+    content: {type: String},
     rate: Number,
     bookmark: Boolean
 }, {

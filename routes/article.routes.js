@@ -34,7 +34,6 @@ router.post("/", authMiddleware, async (req, res) => {
 router.patch("/:articleId", authMiddleware, async (req, res) => {
     try {
         const { articleId } = req.params;
-        // console.log("req.params", req.body, articleId);
         if (articleId === req.body._id) {
             const updatedArticle = await Article.findByIdAndUpdate(articleId, req.body, {new: true});
             res.send(updatedArticle);

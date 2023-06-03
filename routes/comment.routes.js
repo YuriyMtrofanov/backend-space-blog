@@ -3,9 +3,7 @@ const authMiddleware = require("../middleware/auth.middleware");
 const Comment = require("../models/Comment");
 const router = express.Router({ mergeParams: true });
 
-router
-    .route("/")
-    .get(authMiddleware, async (req, res) => {
+router.get("/", authMiddleware, async (req, res) => {
         try {
             const { orderBy, equalTo } = req.body;
             const commentsList = await Comment.find({ [orderBy]: equalTo });
@@ -15,13 +13,16 @@ router
                 messge: "На сервере произошла ошибка. Попробуйте позже..."
             });
         }
-    })
-    .post(authMiddleware, async (req, res) => {
+    });
+
+router.post("/", authMiddleware, async (req, res) => {
         try {
+            console.log("req", req);
             const newComment = await Comment.create({
                 ...req.body,
-                userId: req.body._id
+                // userId: req.body._id
             });
+            // console.log("newComment", newComment);
             res.status(201).send(newComment);
         } catch (error) {
             res.status(500).json({
@@ -30,20 +31,20 @@ router
         }
     });
 
-router.delete("/:commentId",authMiddleware, async (req, res) => {
+router.delete("/:commentId", authMiddleware, async (req, res) => {
     try {
-        const { commentId } = req.params;
-        const removedComment = await Comment.findById(commentId);
-        if (removedComment.userId.toString() === req.user._id){
-            await removedComment.remove();
-            return res.send(null);
+        const { commentId } = req.params
+        const removedComment = await Comment.findById(commentId)
+        if (removedComment.userId.toString() === req.user._id.toString()) {
+            await removedComment.remove()
+            return res.send(null)
         } else {
-            return res.status(401).json({message: 'Unauthorized'});
+            res.status(401).json({message: "Unauthorized"})
         }
-    } catch (error) {
-        res.status(500).json({
-            messge: "На сервере произошла ошибка. Попробуйте позже..."
-        });
+    } catch (e) {
+            res.status(500).json({
+            message: "На сервере произошла ошибка. Попробуйте позже"
+        })
     }
 });
 

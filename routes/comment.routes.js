@@ -3,11 +3,9 @@ const authMiddleware = require("../middleware/auth.middleware");
 const Comment = require("../models/Comment");
 const router = express.Router({ mergeParams: true });
 
-router
-    .route("/")
-    .get(authMiddleware, async (req, res) => {
+router.get("/", authMiddleware, async (req, res) => {
         try {
-            const { orderBy, equalTo } = req.body;
+            const { orderBy, equalTo } = req.query;
             const commentsList = await Comment.find({ [orderBy]: equalTo });
             res.status(200).send(commentsList);
         } catch (error) {
@@ -15,12 +13,13 @@ router
                 messge: "На сервере произошла ошибка. Попробуйте позже..."
             });
         }
-    })
-    .post(authMiddleware, async (req, res) => {
+    });
+
+router.post("/", authMiddleware, async (req, res) => {
         try {
             const newComment = await Comment.create({
-                ...req.body,
-                userId: req.body._id
+                ...req.body
+                // userId: req.body._id
             });
             res.status(201).send(newComment);
         } catch (error) {
@@ -30,19 +29,19 @@ router
         }
     });
 
-router.delete("/:commentId",authMiddleware, async (req, res) => {
+router.delete("/:commentId", authMiddleware, async (req, res) => {
     try {
         const { commentId } = req.params;
         const removedComment = await Comment.findById(commentId);
-        if (removedComment.userId.toString() === req.user._id){
-            await removedComment.remove();
+        if (removedComment.userId.toString() === req.user._id) {
+            await removedComment.deleteOne();
             return res.send(null);
         } else {
-            return res.status(401).json({message: 'Unauthorized'});
+            res.status(401).json({message: "Unauthorized"});
         }
-    } catch (error) {
-        res.status(500).json({
-            messge: "На сервере произошла ошибка. Попробуйте позже..."
+    } catch (e) {
+            res.status(500).json({
+            message: "На сервере произошла ошибка. Попробуйте позже"
         });
     }
 });

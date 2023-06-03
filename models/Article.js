@@ -1,15 +1,14 @@
 const {Schema, model } = require("mongoose");
 
 const schema = new Schema({
-    name: {type: String, required: true},
-    author: {type: String, required: true}, // id автора статьи
+    name: {type: String},
+    author: {type: String}, // id автора статьи
     date: Number,
     category: {type: String},
-    header: {type: String},
     img: {type: String},
     content: {type: String},
     rate: Number,
-    bookmark: Boolean
+    licence: Boolean
 }, {
     timestamps: true
 });

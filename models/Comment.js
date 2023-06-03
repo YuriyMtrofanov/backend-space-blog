@@ -2,8 +2,9 @@ const { Schema, model } = require("mongoose");
 
 const schema = new Schema({
     content: {type: String, required: true},
-	articleId: {type: Schema.Types.ObjectId, ref: "User", required: true}, // id статьи, под которой находится комментарий
-	userId: {type: Schema.Types.ObjectId, ref: "User", required: true} // id человека, который оставил комментарий
+	pageId: {type: String, required: true}, // id статьи, под которой находится комментарий
+	userId: {type: String, required: true}, // id человека, который оставил комментарий
+    created_at: {type: Number, required: true}
 }, {
     timestamps: {createdAt: "created_at"}
 });

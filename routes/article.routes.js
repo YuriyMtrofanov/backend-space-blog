@@ -2,6 +2,7 @@ const express = require("express");
 const authMiddleware = require("../middleware/auth.middleware");
 const router = express.Router({ mergeParams: true });
 const Article = require("../models/Article");
+const User = require("../models/User");
 
 // ./api/article - получение статей
 router.get("/", authMiddleware, async (req, res) => {
@@ -52,7 +53,8 @@ router.delete("/:articleId", authMiddleware, async (req, res) => {
     try {
         const { articleId } = req.params;
         const removedArticle = await Article.findById(articleId);
-        if (removedArticle.author.toString() === req.user._id){
+        const user = await User.findById(req.user._id);
+        if (removedArticle.author.toString() === req.user._id || user.accountType === "admin"){
             removedArticle.deleteOne();
             return res.send(null);
         } else {

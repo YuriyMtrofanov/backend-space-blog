@@ -16,8 +16,6 @@ const schema = new Schema({
     accountType: {type: String},
     rate: Number,
     licence: Boolean
-    // profession: {type: Schema.Types.ObjectId, ref: "Profession"},
-	// qualities: [{type: Schema.Types.ObjectId, ref: "Quality"}] 
 }, {
     timestamps: true
 });

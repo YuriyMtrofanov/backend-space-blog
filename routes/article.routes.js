@@ -4,7 +4,6 @@ const router = express.Router({ mergeParams: true });
 const Article = require("../models/Article");
 const User = require("../models/User");
 
-// ./api/article - получение статей
 router.get("/", authMiddleware, async (req, res) => {
     try {
         const articlesList = await Article.find();
@@ -16,7 +15,6 @@ router.get("/", authMiddleware, async (req, res) => {
     }
 });
 
-// ./api/article - создание статьи
 router.post("/", authMiddleware, async (req, res) => {
     try {
         const newArticle = await Article.create({
@@ -31,7 +29,6 @@ router.post("/", authMiddleware, async (req, res) => {
     }
 });
 
-// ./api/user/:articleId - изменение статьи
 router.patch("/:articleId", authMiddleware, async (req, res) => {
     try {
         const { articleId } = req.params;
@@ -48,7 +45,6 @@ router.patch("/:articleId", authMiddleware, async (req, res) => {
     }
 });
 
-// ./api/user/:articleId - удаление статьи статьи
 router.delete("/:articleId", authMiddleware, async (req, res) => {
     try {
         const { articleId } = req.params;

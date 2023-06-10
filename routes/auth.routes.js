@@ -2,11 +2,9 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const { check, validationResult } = require("express-validator");
 const User = require("../models/User");
-const { generateUserData } = require("../utils/generateUserData");
 const tokenService = require("../services/token.service");
 const router = express.Router({ mergeParams: true });
 
-// ./api/auth/signUp - регистрация
 router.post("/signUp", [
     check("email", message = "Некорректный email").isEmail(),
     check("password", message = "Пароль должен содержать не менее 8 символов").isLength({ min: 8 }),
@@ -34,7 +32,6 @@ router.post("/signUp", [
             }
             const hashedPassword = await bcrypt.hash(password, sold = 12);
             const newUser = await User.create({
-                // ...generateUserData(),
                 ...req.body,
                 password: hashedPassword
             });
@@ -49,9 +46,8 @@ router.post("/signUp", [
     }
 ]);
 
-// ./api/auth/signInWithPassword - логин
 router.post("/signInWithPassword", [
-    check("email", message = "Некорректный email").normalizeEmail().isEmail(),  // 1. Валидация email по другой технологии
+    check("email", message = "Некорректный email").normalizeEmail().isEmail(),
     check("password", message = "Поле должно быть заполнено").exists(),
     async(req, res) => {
         try {
@@ -61,12 +57,11 @@ router.post("/signInWithPassword", [
                     error: {
                         message: "INVALID_DATA",
                         code: 400,
-                        // errors: errors.array()
                     }
                 })
             }
-            const { email, password } = req.body;    // Получаем email / password
-            const existedUser = await User.findOne({ email: email }); // 2. Ищем в коллекции данных пользователя с данным email.
+            const { email, password } = req.body;
+            const existedUser = await User.findOne({ email: email });
             if (!existedUser){
                 return res.status(400).send({
                     error: {
@@ -75,7 +70,7 @@ router.post("/signInWithPassword", [
                     }
                 })
             };
-            const isPasswordEqual = await bcrypt.compare(password, existedUser.password) // 3. Сравниваем хешированные пароли
+            const isPasswordEqual = await bcrypt.compare(password, existedUser.password);
             if  (!isPasswordEqual){
                 return res.status(400).send({
                     error: {
@@ -84,7 +79,7 @@ router.post("/signInWithPassword", [
                     }
                 })
             }
-            const tokens = tokenService.generate({_id: existedUser._id}); // 5. Сгенерировать JWT token и Refresh toket
+            const tokens = tokenService.generate({_id: existedUser._id});
             await tokenService.save(existedUser._id, tokens.refreshToken);
             res.status(201).send({ ...tokens, userId: existedUser._id });  
         } catch (error) {
@@ -95,7 +90,6 @@ router.post("/signInWithPassword", [
     }
 ]);
 
-// ./api/auth/token - обновение токена
 router.post("/token", async (req, res) => {
     try {
         const { refresh_token: refreshToken } = req.body;

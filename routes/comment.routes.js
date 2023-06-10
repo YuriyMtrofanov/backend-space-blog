@@ -19,7 +19,6 @@ router.post("/", authMiddleware, async (req, res) => {
         try {
             const newComment = await Comment.create({
                 ...req.body
-                // userId: req.body._id
             });
             res.status(201).send(newComment);
         } catch (error) {

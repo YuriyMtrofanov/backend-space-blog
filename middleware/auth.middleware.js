@@ -5,7 +5,6 @@ module.exports = (req, res, next) => {
         return next();
     }
     try {
-        // headers key = authorization; headers value = Bearer "token"
         const token = req.headers.authorization.split(" ")[1];
         if (!token){
             return res.status(401).json({message: "Access token doesn`t exist"});
